@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://fh0725.github.io/images/og_image.png">
 <meta property="article:published_time" content="2020-03-31T09:03:48.000Z">
-<meta property="article:modified_time" content="2020-04-01T08:23:44.558Z">
+<meta property="article:modified_time" content="2020-04-01T09:25:11.659Z">
 <meta property="article:author" content="冯皓">
 <meta property="article:tag" content="搭建博客">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    26 分钟 读完 (大约 3952 个字)
+                    26 分钟 读完 (大约 3942 个字)
                 </span>
                 
                 
@@ -241,7 +241,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
 
 <p>这个时候它会告诉你已经生成了.ssh的文件夹。在你的电脑中找到这个文件夹。</p>
-<p><img src="/.io//C:%5CUsers%5C%E5%86%AF%E7%9A%93%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585648028027.png" alt="1585648028027"></p>
+<p><img src="/.io//1585648028027.png" alt="1585648028027"></p>
 <p>ssh，简单来讲，就是一个秘钥，其中，<code>id_rsa</code>是你这台电脑的私人秘钥，不能给别人看的，<code>id_rsa.pub</code>是公共秘钥，可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。</p>
 <p>而后在GitHub的setting中，找到SSH keys的设置选项，点击<code>New SSH key</code> 把你的<code>id_rsa.pub</code>里面的信息复制进去。</p>
 <p>在gitbash中，查看是否成功</p>
