@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>emqttd实现消息订阅、发布、退订 - 程序员的江湖</title>
+
+
+    <meta name="description" content="1 前言springboot集成emqttd前请先安装和部署emqttd服务并进行简单的测试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="emqttd实现消息订阅、发布、退订">
+<meta property="og:url" content="http://fh0725.github.io/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/index.html">
+<meta property="og:site_name" content="程序员的江湖">
+<meta property="og:description" content="1 前言springboot集成emqttd前请先安装和部署emqttd服务并进行简单的测试。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fh0725.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-04-02T04:24:16.000Z">
+<meta property="article:modified_time" content="2020-04-02T05:07:27.294Z">
+<meta property="article:author" content="冯皓">
+<meta property="article:tag" content="emqttd">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fh0725.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="emqttd实现消息订阅、发布、退订" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/fh0725">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1360 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                emqttd实现消息订阅、发布、退订
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>springboot集成emqttd前请先安装和部署emqttd服务并进行简单的测试。</p>
+<a id="more"></a>
+
+<h1 id="2-相关配置"><a href="#2-相关配置" class="headerlink" title="2 相关配置"></a>2 相关配置</h1><h3 id="1、在pom文件下添加以下maven依赖："><a href="#1、在pom文件下添加以下maven依赖：" class="headerlink" title="1、在pom文件下添加以下maven依赖："></a>1、在pom文件下添加以下maven依赖：</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-integration<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.integration<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-integration-stream<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.integration<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-integration-mqtt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、在-yml文件中进行mqtt的连接配置"><a href="#2、在-yml文件中进行mqtt的连接配置" class="headerlink" title="2、在.yml文件中进行mqtt的连接配置"></a>2、在.yml文件中进行mqtt的连接配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">mqtt:</span></span><br><span class="line">		<span class="attr">username:</span> <span class="string">admin</span>				<span class="comment"># 账号，开启匿名连接后不需要填写账号和密码</span></span><br><span class="line">		<span class="attr">password:</span> <span class="string">public</span>			<span class="comment"># 密码</span></span><br><span class="line">		<span class="attr">host-url:</span> <span class="string">tcp://ip:1883</span>		<span class="comment"># mqtt连接tcp地址</span></span><br><span class="line">		<span class="attr">client-id:</span> <span class="string">test</span>				<span class="comment"># 客户端Id，每个启动的id要不同</span></span><br><span class="line">		<span class="attr">default-topic:</span> <span class="string">test</span>			<span class="comment"># 默认主题</span></span><br><span class="line">		<span class="attr">timeout:</span> <span class="number">100</span>				<span class="comment"># 超时时间</span></span><br><span class="line">		<span class="attr">keepalive:</span> <span class="number">100</span>				<span class="comment"># 保持连接数</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="三、springboot-emqttd的整合"><a href="#三、springboot-emqttd的整合" class="headerlink" title="三、springboot-emqttd的整合"></a>三、springboot-emqttd的整合</h1><h2 id="1、获取配置"><a href="#1、获取配置" class="headerlink" title="1、获取配置"></a>1、获取配置</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">package com.qtone.study.mqtt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @description: mqtt相关配置信息</span></span><br><span class="line"><span class="comment"> * @author: fenghao</span></span><br><span class="line"><span class="comment"> * @date: 2020/3/23</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(<span class="string">"spring.mqtt"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MqttConfig</span> &#123;</span></span><br><span class="line">    @Autowired</span><br><span class="line">    <span class="keyword">private</span> MqttPushClient mqttPushClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 用户名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> username;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 密码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> password;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 连接地址ip+端口</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> hostUrl;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 客户端Id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> clientId;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 主题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> defaultTopic;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 超时时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> timeout;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保持连接数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> keepalive;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    <span class="function"><span class="keyword">public</span> MqttPushClient <span class="title">getMqttPushClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mqttPushClient.<span class="built_in">connect</span>(hostUrl, clientId, username, password, timeout, keepalive);</span><br><span class="line">        <span class="keyword">return</span> mqttPushClient;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">String</span> <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(<span class="keyword">String</span> username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">String</span> <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(<span class="keyword">String</span> password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">String</span> <span class="title">getHostUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> hostUrl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHostUrl</span><span class="params">(<span class="keyword">String</span> hostUrl)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.hostUrl = hostUrl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">String</span> <span class="title">getClientId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> clientId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setClientId</span><span class="params">(<span class="keyword">String</span> clientId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.clientId = clientId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">String</span> <span class="title">getDefaultTopic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> defaultTopic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDefaultTopic</span><span class="params">(<span class="keyword">String</span> defaultTopic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.defaultTopic = defaultTopic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTimeout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> timeout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTimeout</span><span class="params">(<span class="keyword">int</span> timeout)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.timeout = timeout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getKeepalive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> keepalive;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKeepalive</span><span class="params">(<span class="keyword">int</span> keepalive)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.keepalive = keepalive;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、mqtt推送客户端"><a href="#2、mqtt推送客户端" class="headerlink" title="2、mqtt推送客户端"></a>2、mqtt推送客户端</h3><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qtone.study.mqtt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.eclipse.paho.client.mqttv3.*;</span><br><span class="line"><span class="keyword">import</span> org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: mqtt推送客户端</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: fenghao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MqttPushClient</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(MqttPushClient<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PushCallback pushCallback;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MqttConfig mqttConfig;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> MqttClient client;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="function">MqttClient <span class="title">getClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> client;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">setClient</span><span class="params">(MqttClient client)</span> </span>&#123;</span><br><span class="line">        MqttPushClient.client = client;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: host         ip+端口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: clientID     客户端Id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: username     用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: password     密码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: timeout      超时时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: keepalive    保持连接数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 客户端连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(String host, String clientID, String username, String password, <span class="keyword">int</span> timeout, <span class="keyword">int</span> keepalive)</span> </span>&#123;</span><br><span class="line">        MqttClient client;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            client = <span class="keyword">new</span> MqttClient(host, clientID, <span class="keyword">new</span> MemoryPersistence());</span><br><span class="line">            MqttConnectOptions options = <span class="keyword">new</span> MqttConnectOptions();</span><br><span class="line">            options.setCleanSession(<span class="keyword">false</span>);</span><br><span class="line">            options.setUserName(username);</span><br><span class="line">            options.setPassword(password.toCharArray());</span><br><span class="line">            options.setConnectionTimeout(timeout);</span><br><span class="line">            options.setKeepAliveInterval(keepalive);</span><br><span class="line">            MqttPushClient.setClient(client);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                client.setCallback(pushCallback);</span><br><span class="line">                client.connect(options);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: pushMessage</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 推送，默认qos为0，非持久化</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">publish</span><span class="params">(String topic,String pushMessage)</span></span>&#123;</span><br><span class="line">        publish(<span class="number">0</span>, <span class="keyword">false</span>, topic, pushMessage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: qos   连接方式（0，1，2）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: retained  是否保留（boolean）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic  主题</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: pushMessage  消息体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 推送消息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">publish</span><span class="params">(<span class="keyword">int</span> qos, <span class="keyword">boolean</span> retained, String topic, String pushMessage)</span> </span>&#123;</span><br><span class="line">        MqttMessage message = <span class="keyword">new</span> MqttMessage();</span><br><span class="line">        message.setQos(qos);</span><br><span class="line">        message.setRetained(retained);</span><br><span class="line">        message.setPayload(pushMessage.getBytes());</span><br><span class="line">        MqttTopic mTopic = MqttPushClient.getClient().getTopic(topic);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == mTopic) &#123;</span><br><span class="line">            logger.<span class="keyword">error</span>(<span class="string">"topic not exist"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        MqttDeliveryToken token;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            token = mTopic.publish(message);</span><br><span class="line">            token.waitForCompletion();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MqttPersistenceException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MqttException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 订阅某个主题，qos默认为0</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(String name,String topic)</span></span>&#123;</span><br><span class="line">        logger.info(name +<span class="string">"开始订阅主题"</span> + topic);</span><br><span class="line">        subscribe(topic,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: qos</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 订阅某个主题</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(String topic, <span class="keyword">int</span> qos)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MqttPushClient.getClient().subscribe(topic, qos);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MqttException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 取消订阅某个主题</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">unSubscribe</span><span class="params">(String name,String topic)</span> </span>&#123;</span><br><span class="line">        logger.info(name +<span class="string">"取消订阅主题"</span> + topic);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MqttPushClient.getClient().unsubscribe(topic);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MqttException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 重新连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: void</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/3/27</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">startReconnect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!client.isConnected()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!client.isConnected()) &#123;</span><br><span class="line">                logger.info(<span class="string">"mqtt开始尝试重连"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">2</span>);</span><br><span class="line">                    mqttConfig.getMqttPushClient();</span><br><span class="line">                    logger.info(<span class="string">"mqtt重连成功"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    logger.<span class="keyword">error</span>(<span class="string">"mqtt重连失败，继续重连中"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            logger.info(<span class="string">"mqtt已经连接，无需重连"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、-消费监听类"><a href="#3、-消费监听类" class="headerlink" title="3、 消费监听类"></a>3、 消费监听类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qtone.study.mqtt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;</span><br><span class="line"><span class="keyword">import</span> org.eclipse.paho.client.mqttv3.MqttCallback;</span><br><span class="line"><span class="keyword">import</span> org.eclipse.paho.client.mqttv3.MqttMessage;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 消费监听类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: fenghao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PushCallback</span> <span class="keyword">implements</span> <span class="title">MqttCallback</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(MqttPushClient<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MqttPushClient mqttPushClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectionLost</span><span class="params">(Throwable throwable)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 连接丢失后，在这里进行重连</span></span><br><span class="line">        logger.error(<span class="string">"连接断开，正在尝试重连 -&gt; "</span>, throwable);</span><br><span class="line">        mqttPushClient.startReconnect();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deliveryComplete</span><span class="params">(IMqttDeliveryToken iMqttDeliveryToken)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"消息发送成功 -&gt; "</span> + iMqttDeliveryToken.isComplete());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">messageArrived</span><span class="params">(String topic, MqttMessage mqttMessage)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">         logger.info(<span class="string">"=======接收消息主题 : "</span> + topic);</span><br><span class="line">         logger.info(<span class="string">"=======接收消息Qos : "</span> + mqttMessage.getQos());</span><br><span class="line">         logger.info(<span class="string">"=======接收消息内容 : "</span> + <span class="keyword">new</span> String(mqttMessage.getPayload()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、-测试消息发布、订阅、退订"><a href="#4、-测试消息发布、订阅、退订" class="headerlink" title="4、 测试消息发布、订阅、退订"></a>4、 测试消息发布、订阅、退订</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qtone.study.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.qtone.study.mqtt.MqttPushClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.<span class="keyword">annotation</span>.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.<span class="keyword">annotation</span>.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 测试消息发布、订阅、退订</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: fenghao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2020/3/23</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(<span class="meta-string">"/"</span>)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MqttPushClient mqttPushClient;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 消息发布</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: java.lang.String</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/4/2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(value = <span class="meta-string">"/publishTopic"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> String publishTopic(<span class="keyword">final</span> String name,<span class="keyword">final</span> String topic)&#123;</span><br><span class="line">        mqttPushClient.subscribe(name,topic);</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"================name : "</span>+name);</span><br><span class="line">        <span class="keyword">for</span>(int i =<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++) &#123;</span><br><span class="line">            mqttPushClient.publish(<span class="number">2</span>,<span class="literal">false</span>,topic, <span class="string">"测试name: "</span> + name + <span class="string">"推送第"</span> + i + <span class="string">"条消息"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 消息订阅</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: java.lang.String</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/4/2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(value = <span class="meta-string">"/subscribe"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> String subscribe(String name,String topic) &#123;</span><br><span class="line">        mqttPushClient.subscribe(name,topic);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: topic</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 消息退订</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: java.lang.String</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/4/2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(value = <span class="meta-string">"/unSubscribe"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> String unSubscribe(String name,String topic) &#123;</span><br><span class="line">        mqttPushClient.unSubscribe(name,topic);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-测试成果"><a href="#3-测试成果" class="headerlink" title="3 测试成果"></a>3 测试成果</h1><p>1、进入后台连接服务器</p>
+<img src="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/1585803041625.png" class title="加载图片中">
+
+<p>2、订阅<code>“test/test”</code>主题</p>
+<img src="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/1585803115970.png" class title="加载图片中">
+
+<p>3、接口发送相关信息进行测试（<a href="http://127.0.0.1:8080/publishTopic?name=qtone&amp;topic=test/test）">http://127.0.0.1:8080/publishTopic?name=qtone&amp;topic=test/test）</a></p>
+<p>4、后台接收到相应的信息</p>
+<img src="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/1585803872489.png" class title="加载图片中">
+
+<p>此时项目中的客户端也订阅了<code>test/test</code>下的主题，因此也会收到相应的消息。</p>
+<img src="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/1585803617746.png" class title="加载图片中">
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/emqttd/" rel="tag">emqttd</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">
+                <span class="level-item">emqttd服务搭建</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'FoP6lhnotTaDXjAyKMytVe5P-gzGzoHsz',
+        app_key: 'qvAdXiqKGPA0XjzLqT120wfS',
+        placeholder: '要不要说点啥...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/fh.jpg" alt="冯皓">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        冯皓
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java软件开发工程师
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>陕西 西安</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            2
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/fh0725" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/fh0725">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://surpass.org.cn/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Surpasser</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">surpass.org.cn</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/springboot/">
+            <span class="level-start">
+                <span class="level-item">springboot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%90%AD%E5%BB%BA/">
+            <span class="level-start">
+                <span class="level-item">搭建</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/emqttd/" style="font-size: 10px;">emqttd</a> <a href="/tags/emqttd%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">emqttd搭建</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">hexo搭建，博客</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="emqttd实现消息订阅、发布、退订">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd实现消息订阅、发布、退订</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="emqttd服务搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T03:30:05.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd服务搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="小白初入Hexo">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T09:03:48.000Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="title has-link-black-ter is-size-6 has-text-weight-normal">小白初入Hexo</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%B8%96%E5%AD%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="第一个帖子">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T06:14:50.606Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%B8%96%E5%AD%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">第一个帖子</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd/">
+                        <span class="tag">emqttd</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd%E6%90%AD%E5%BB%BA/">
+                        <span class="tag">emqttd搭建</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/">
+                        <span class="tag">hexo搭建，博客</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="emqttd实现消息订阅、发布、退订">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd实现消息订阅、发布、退订</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="emqttd服务搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T03:30:05.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd服务搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="小白初入Hexo">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T09:03:48.000Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="title has-link-black-ter is-size-6 has-text-weight-normal">小白初入Hexo</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%B8%96%E5%AD%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="第一个帖子">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T06:14:50.606Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%B8%96%E5%AD%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">第一个帖子</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd/">
+                        <span class="tag">emqttd</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd%E6%90%AD%E5%BB%BA/">
+                        <span class="tag">emqttd搭建</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/">
+                        <span class="tag">hexo搭建，博客</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="emqttd实现消息订阅、发布、退订" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 冯皓&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://ppoffice.github.io/hexo-theme-icarus">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/fh0725">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://fh0725.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
