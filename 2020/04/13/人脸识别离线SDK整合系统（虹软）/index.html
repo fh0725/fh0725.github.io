@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>人脸识别离线SDK整合系统（虹软） - 程序员的江湖</title>
+
+
+    <meta name="description" content="1 前言整合人脸识别实现刷脸登录，需要进行一定的步骤：  下载离线SDK  相关配置  后端代码逻辑  前端界面展示  测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人脸识别离线SDK整合系统（虹软）">
+<meta property="og:url" content="http://fh0725.github.io/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/index.html">
+<meta property="og:site_name" content="程序员的江湖">
+<meta property="og:description" content="1 前言整合人脸识别实现刷脸登录，需要进行一定的步骤：  下载离线SDK  相关配置  后端代码逻辑  前端界面展示  测试">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fh0725.github.io/gallery/6.jpg">
+<meta property="article:published_time" content="2020-04-13T02:49:55.000Z">
+<meta property="article:modified_time" content="2020-04-13T04:22:38.441Z">
+<meta property="article:author" content="冯皓">
+<meta property="article:tag" content="人脸识别，SDK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fh0725.github.io/gallery/6.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="人脸识别离线SDK整合系统（虹软）" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/fh0725">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/gallery/6.jpg" alt="人脸识别离线SDK整合系统（虹软）">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-13T02:49:55.000Z">2020-04-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B4%E5%90%88/">整合</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2120 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                人脸识别离线SDK整合系统（虹软）
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>整合人脸识别实现刷脸登录，需要进行一定的步骤：</p>
+<ul>
+<li><p>下载离线SDK</p>
+</li>
+<li><p>相关配置</p>
+</li>
+<li><p>后端代码逻辑</p>
+</li>
+<li><p>前端界面展示</p>
+</li>
+<li><p>测试</p>
+<a id="more"></a>
+
+</li>
+</ul>
+<h1 id="2-整合人脸识别"><a href="#2-整合人脸识别" class="headerlink" title="2 整合人脸识别"></a>2 整合人脸识别</h1><h2 id="2-1-下载离线SDK"><a href="#2-1-下载离线SDK" class="headerlink" title="2.1 下载离线SDK"></a>2.1 下载离线SDK</h2><p>ArcFace 3.0 免费离线人脸识别SDK：独立离线版SDK，拥有人脸检测、人脸对比、人证比对、人脸跟踪等功能。</p>
+<p>进入<a href="https://ai.arcsoft.com.cn/product/arcface.html?utm_source=sogo&utm_campaign=p20&utm_medium=cpc">ArcFace</a>开发平台下载适合自己系统的免费离线SDK，免费版和增值版区别如下图</p>
+<img src="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/1586746929914.png" class title="加载图片中">
+
+<h2 id="2-2-相关配置"><a href="#2-2-相关配置" class="headerlink" title="2.2 相关配置"></a>2.2 相关配置</h2><p>作者下载的windows64版本的，下载解压后文件目录如下</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ArcFace</span><br><span class="line">	doc</span><br><span class="line">		ARCSOFT_ARC_FACE_JAVA_DEVELOPER'<span class="module-access"><span class="module"><span class="identifier">S_GUIDE</span>.</span></span>pdf	<span class="comment">//开发文档</span></span><br><span class="line">	libs</span><br><span class="line">		WIN64</span><br><span class="line"><span class="operator">			...		</span><span class="comment">//引擎文件</span></span><br><span class="line">		arcsoft-sdk-face-<span class="number">3.0</span>.<span class="number">0.0</span>.jar	<span class="comment">//jar包</span></span><br><span class="line">	samplecode</span><br><span class="line">		<span class="module-access"><span class="module"><span class="identifier">FaceEngineTest</span>.</span></span>java		<span class="comment">//测试类</span></span><br></pre></td></tr></table></figure>
+
+<p>还需要在<a href="https://ai.arcsoft.com.cn/ucenter/resource/build/index.html#/application">ArFace</a>上获取appId和sdkKey，如下图</p>
+<img src="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/1586747806225.png" class title="加载图片中">
+
+<p>将jar包导入自己的项目。</p>
+<p>将解压文件保存到合适的地方。</p>
+<h2 id="2-3-后端代码逻辑"><a href="#2-3-后端代码逻辑" class="headerlink" title="2.3 后端代码逻辑"></a>2.3 后端代码逻辑</h2><p>UserAction.java：面部信息录入方法和登录方法</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 录入面部信息</span></span><br><span class="line"><span class="comment">* @return</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">public String add<span class="constructor">Face()</span> &#123;</span><br><span class="line">	User users = (User) <span class="module-access"><span class="module"><span class="identifier">ServletActionContext</span>.</span></span>get<span class="constructor">Request()</span>.get<span class="constructor">Session()</span>.get<span class="constructor">Attribute(<span class="string">"user"</span>)</span>;</span><br><span class="line">	<span class="keyword">if</span>(!users.get<span class="constructor">LoginPwd()</span>.equals(<span class="module-access"><span class="module"><span class="identifier">MD5Utils</span>.</span></span>md5(user.get<span class="constructor">LoginPwd()</span>)))&#123;</span><br><span class="line">		jsonData.put(<span class="string">"code"</span>, <span class="number">100</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="comment">//解码得到图片路径</span></span><br><span class="line">		String faceImg = <span class="module-access"><span class="module"><span class="identifier">BaseData</span>.</span></span>base<span class="constructor">Data(<span class="params">user</span>.<span class="params">getFaceImg</span>()</span>);</span><br><span class="line">		user.set<span class="constructor">FaceImg(<span class="params">faceImg</span>)</span>;</span><br><span class="line">		userService.add<span class="constructor">Face(<span class="params">user</span>)</span>; <span class="comment">//添加面部信息</span></span><br><span class="line">        <span class="keyword">if</span>(users.get<span class="constructor">FaceImg()</span> != null)&#123;</span><br><span class="line">        	File file = <span class="keyword">new</span> <span class="constructor">File(<span class="string">"F:\\IDEA\\workspace\\wanjia\\src\\main\\webapp\\upload\\faceimg\\"</span>+<span class="params">users</span>.<span class="params">getFaceImg</span>()</span>);</span><br><span class="line">            file.delete<span class="literal">()</span>;<span class="comment">//删除上次的面部信息</span></span><br><span class="line">        &#125;</span><br><span class="line">		jsonData.put(<span class="string">"code"</span>, <span class="number">200</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	return <span class="string">"addFace"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 登录</span></span><br><span class="line"><span class="comment">* @return</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">public String json<span class="constructor">Login()</span> &#123;</span><br><span class="line">	<span class="keyword">if</span>(user.get<span class="constructor">FaceImg()</span><span class="operator"> == </span>null)&#123;</span><br><span class="line">		user = userService.login(user);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="comment">//解码得到图片路径</span></span><br><span class="line">		String faceImg = <span class="module-access"><span class="module"><span class="identifier">BaseData</span>.</span></span>base<span class="constructor">Data(<span class="params">user</span>.<span class="params">getFaceImg</span>()</span>);</span><br><span class="line">		List&lt;User&gt; userList = userService.find<span class="constructor">UserAll()</span>;</span><br><span class="line">		<span class="comment">//检测比对</span></span><br><span class="line">		user = <span class="module-access"><span class="module"><span class="identifier">FacesUtil</span>.</span></span>faces(faceImg ,userList);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="module-access"><span class="module"><span class="identifier">ServletActionContext</span>.</span></span>get<span class="constructor">Request()</span>.get<span class="constructor">Session()</span>.set<span class="constructor">Attribute(<span class="string">"user"</span>, <span class="params">user</span>)</span>;</span><br><span class="line">	<span class="keyword">if</span>(user!=null) &#123;</span><br><span class="line">		DetachedCriteria detachedCriteria = <span class="module-access"><span class="module"><span class="identifier">DetachedCriteria</span>.</span></span>for<span class="constructor">Class(Orders.<span class="params">class</span>)</span>;</span><br><span class="line">		jsonData.put(<span class="string">"code"</span>, <span class="number">200</span>);</span><br><span class="line">		<span class="keyword">if</span>(user.get<span class="constructor">UserType()</span>.get<span class="constructor">UserTypeId()</span>==<span class="number">3</span>) &#123;</span><br><span class="line">			jsonData.put(<span class="string">"type"</span>, <span class="number">3</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(user.get<span class="constructor">UserType()</span>.get<span class="constructor">UserTypeId()</span>==<span class="number">2</span>)&#123;</span><br><span class="line">			jsonData.put(<span class="string">"type"</span>, <span class="number">2</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			jsonData.put(<span class="string">"type"</span>, <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return <span class="string">"jsonLogin"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BaseData.java:后端接受的img信息是BASE64码，需要进行解码。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">package com.wanjia.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sun.misc.BASE64Decoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.<span class="built_in">text</span>.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @description: BASE64解码</span></span><br><span class="line"><span class="comment"> * @author: fenghao</span></span><br><span class="line"><span class="comment"> * @date: 2020/4/10</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseData</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> <span class="title">baseData</span><span class="params">(<span class="keyword">String</span> img)</span></span>&#123;</span><br><span class="line">        BASE64Decoder decoder = <span class="keyword">new</span> BASE64Decoder();</span><br><span class="line">        <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            bytes = decoder.decodeBuffer(img);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 字节流转文件</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        FileOutputStream fos = null;</span><br><span class="line">        <span class="keyword">String</span> imgpath = reName();</span><br><span class="line">        <span class="keyword">String</span> name =<span class="string">"F:\\IDEA\\workspace\\wanjia\\src\\main\\webapp\\upload\\faceimg\\"</span>+imgpath;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fos = <span class="keyword">new</span> FileOutputStream(name);</span><br><span class="line">            fos.<span class="built_in">write</span>(bytes);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (</span><br><span class="line">                IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            <span class="keyword">if</span> (fos != null)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    fos.<span class="built_in">close</span>();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> imgpath;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> <span class="title">reName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">String</span> format= <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyyMMddHHmmSS"</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line">        <span class="keyword">int</span> num = (<span class="keyword">int</span>)(Math.<span class="built_in">random</span>()*<span class="number">9</span>+<span class="number">1</span>)*<span class="number">725</span>;</span><br><span class="line">        <span class="keyword">return</span> format+num+<span class="string">".jpg"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>FaceUtil.java:人脸比对工具类</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">package com.wanjia.utils;</span><br><span class="line"></span><br><span class="line">import com.arcsoft.face.*;</span><br><span class="line">import com.arcsoft.face.enums.DetectMode;</span><br><span class="line">import com.arcsoft.face.enums.DetectOrient;</span><br><span class="line">import com.arcsoft.face.enums.ErrorInfo;</span><br><span class="line">import com.arcsoft.face.toolkit.ImageInfo;</span><br><span class="line">import com.wanjia.domain.User;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import static com.arcsoft.face.toolkit.<span class="module-access"><span class="module"><span class="identifier">ImageFactory</span>.</span></span>getRGBData;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @description: 人脸比对工具类</span></span><br><span class="line"><span class="comment"> * @author: fenghao</span></span><br><span class="line"><span class="comment"> * @date: 2020/4/9</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line">public <span class="keyword">class</span> FacesUtil &#123;</span><br><span class="line">    public static User faces(String pathName , List&lt;User&gt; userList)&#123;</span><br><span class="line">        <span class="comment">//从官网获取</span></span><br><span class="line">        String appId = <span class="string">""</span>;</span><br><span class="line">        String sdkKey = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        FaceEngine faceEngine = <span class="keyword">new</span> <span class="constructor">FaceEngine(<span class="string">"G:\\jar\\ArcFace_Java_Windows\\libs\\WIN64"</span>)</span>;<span class="comment">//SDK文件中的WIN64文件夹</span></span><br><span class="line">        <span class="comment">//激活引擎</span></span><br><span class="line">        <span class="built_in">int</span> errorCode = faceEngine.active<span class="constructor">Online(<span class="params">appId</span>, <span class="params">sdkKey</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (errorCode != <span class="module-access"><span class="module"><span class="identifier">ErrorInfo</span>.</span><span class="module"><span class="identifier">MOK</span>.</span></span>get<span class="constructor">Value()</span><span class="operator"> &amp;&amp; </span>errorCode != <span class="module-access"><span class="module"><span class="identifier">ErrorInfo</span>.</span><span class="module"><span class="identifier">MERR_ASF_ALREADY_ACTIVATED</span>.</span></span>get<span class="constructor">Value()</span>) &#123;</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"引擎激活失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ActiveFileInfo activeFileInfo=<span class="keyword">new</span> <span class="constructor">ActiveFileInfo()</span>;</span><br><span class="line">        errorCode = faceEngine.get<span class="constructor">ActiveFileInfo(<span class="params">activeFileInfo</span>)</span>;</span><br><span class="line">        <span class="keyword">if</span> (errorCode != <span class="module-access"><span class="module"><span class="identifier">ErrorInfo</span>.</span><span class="module"><span class="identifier">MOK</span>.</span></span>get<span class="constructor">Value()</span><span class="operator"> &amp;&amp; </span>errorCode != <span class="module-access"><span class="module"><span class="identifier">ErrorInfo</span>.</span><span class="module"><span class="identifier">MERR_ASF_ALREADY_ACTIVATED</span>.</span></span>get<span class="constructor">Value()</span>) &#123;</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"获取激活文件信息失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//引擎配置</span></span><br><span class="line">        EngineConfiguration engineConfiguration = <span class="keyword">new</span> <span class="constructor">EngineConfiguration()</span>;</span><br><span class="line">        engineConfiguration.set<span class="constructor">DetectMode(DetectMode.ASF_DETECT_MODE_IMAGE)</span>;</span><br><span class="line">        engineConfiguration.set<span class="constructor">DetectFaceOrientPriority(DetectOrient.ASF_OP_ALL_OUT)</span>;</span><br><span class="line">        engineConfiguration.set<span class="constructor">DetectFaceMaxNum(10)</span>;</span><br><span class="line">        engineConfiguration.set<span class="constructor">DetectFaceScaleVal(16)</span>;</span><br><span class="line">        <span class="comment">//功能配置</span></span><br><span class="line">        FunctionConfiguration functionConfiguration = <span class="keyword">new</span> <span class="constructor">FunctionConfiguration()</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportAge(<span class="params">true</span>)</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportFace3dAngle(<span class="params">true</span>)</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportFaceDetect(<span class="params">true</span>)</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportFaceRecognition(<span class="params">true</span>)</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportGender(<span class="params">true</span>)</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportLiveness(<span class="params">true</span>)</span>;</span><br><span class="line">        functionConfiguration.set<span class="constructor">SupportIRLiveness(<span class="params">true</span>)</span>;</span><br><span class="line">        engineConfiguration.set<span class="constructor">FunctionConfiguration(<span class="params">functionConfiguration</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化引擎</span></span><br><span class="line">        errorCode = faceEngine.init(engineConfiguration);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (errorCode != <span class="module-access"><span class="module"><span class="identifier">ErrorInfo</span>.</span><span class="module"><span class="identifier">MOK</span>.</span></span>get<span class="constructor">Value()</span>) &#123;</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"初始化引擎失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        File file = <span class="keyword">new</span> <span class="constructor">File(<span class="string">"F:\\IDEA\\workspace\\wanjia\\src\\main\\webapp\\upload\\faceimg\\"</span>+<span class="params">pathName</span>)</span>;</span><br><span class="line">        <span class="comment">//人脸检测</span></span><br><span class="line">        ImageInfo imageInfo = get<span class="constructor">RGBData(<span class="params">file</span>)</span>;</span><br><span class="line">        List&lt;FaceInfo&gt; faceInfoList = <span class="keyword">new</span> ArrayList&lt;FaceInfo&gt;<span class="literal">()</span>;</span><br><span class="line">        errorCode = faceEngine.detect<span class="constructor">Faces(<span class="params">imageInfo</span>.<span class="params">getImageData</span>()</span>, imageInfo.get<span class="constructor">Width()</span>, imageInfo.get<span class="constructor">Height()</span>, imageInfo.get<span class="constructor">ImageFormat()</span>, faceInfoList);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//特征提取</span></span><br><span class="line">        FaceFeature faceFeature = <span class="keyword">new</span> <span class="constructor">FaceFeature()</span>;</span><br><span class="line">        errorCode = faceEngine.extract<span class="constructor">FaceFeature(<span class="params">imageInfo</span>.<span class="params">getImageData</span>()</span>, imageInfo.get<span class="constructor">Width()</span>, imageInfo.get<span class="constructor">Height()</span>, imageInfo.get<span class="constructor">ImageFormat()</span>, faceInfoList.get(<span class="number">0</span>), faceFeature);</span><br><span class="line">        <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"特征值大小："</span> + faceFeature.get<span class="constructor">FeatureData()</span>.length);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置活体测试</span></span><br><span class="line">        errorCode = faceEngine.set<span class="constructor">LivenessParam(0.5f, 0.7f)</span>;</span><br><span class="line">        <span class="comment">//人脸属性检测</span></span><br><span class="line">        FunctionConfiguration configuration = <span class="keyword">new</span> <span class="constructor">FunctionConfiguration()</span>;</span><br><span class="line">        configuration.set<span class="constructor">SupportAge(<span class="params">true</span>)</span>;</span><br><span class="line">        configuration.set<span class="constructor">SupportFace3dAngle(<span class="params">true</span>)</span>;</span><br><span class="line">        configuration.set<span class="constructor">SupportGender(<span class="params">true</span>)</span>;</span><br><span class="line">        configuration.set<span class="constructor">SupportLiveness(<span class="params">true</span>)</span>;</span><br><span class="line">        errorCode = faceEngine.process(imageInfo.get<span class="constructor">ImageData()</span>, imageInfo.get<span class="constructor">Width()</span>, imageInfo.get<span class="constructor">Height()</span>, imageInfo.get<span class="constructor">ImageFormat()</span>, faceInfoList, configuration);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//活体检测</span></span><br><span class="line">        List&lt;LivenessInfo&gt; livenessInfoList = <span class="keyword">new</span> ArrayList&lt;LivenessInfo&gt;<span class="literal">()</span>;</span><br><span class="line">        errorCode = faceEngine.get<span class="constructor">Liveness(<span class="params">livenessInfoList</span>)</span>;</span><br><span class="line">        <span class="built_in">int</span> liveness = livenessInfoList.get(<span class="number">0</span>).get<span class="constructor">Liveness()</span>;</span><br><span class="line">        <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"活体："</span> + liveness);</span><br><span class="line">        <span class="keyword">if</span>(liveness<span class="operator"> == </span><span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">float</span> score = <span class="number">0</span>;</span><br><span class="line">            for (User user : userList) &#123;</span><br><span class="line">                <span class="keyword">if</span>(user.get<span class="constructor">FaceImg()</span><span class="operator"> == </span>null)&#123;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//人脸检测2</span></span><br><span class="line">                ImageInfo imageInfo2 = get<span class="constructor">RGBData(<span class="params">new</span> File(<span class="string">"F:\\IDEA\\workspace\\wanjia\\src\\main\\webapp\\upload\\faceimg\\"</span>+<span class="params">user</span>.<span class="params">getFaceImg</span>()</span>));</span><br><span class="line">                List&lt;FaceInfo&gt; faceInfoList2 = <span class="keyword">new</span> ArrayList&lt;FaceInfo&gt;<span class="literal">()</span>;</span><br><span class="line">                errorCode = faceEngine.detect<span class="constructor">Faces(<span class="params">imageInfo2</span>.<span class="params">getImageData</span>()</span>, imageInfo2.get<span class="constructor">Width()</span>, imageInfo2.get<span class="constructor">Height()</span>,imageInfo.get<span class="constructor">ImageFormat()</span>, faceInfoList2);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//特征提取2</span></span><br><span class="line">                FaceFeature faceFeature2 = <span class="keyword">new</span> <span class="constructor">FaceFeature()</span>;</span><br><span class="line">                errorCode = faceEngine.extract<span class="constructor">FaceFeature(<span class="params">imageInfo2</span>.<span class="params">getImageData</span>()</span>, imageInfo2.get<span class="constructor">Width()</span>, imageInfo2.get<span class="constructor">Height()</span>, imageInfo.get<span class="constructor">ImageFormat()</span>, faceInfoList2.get(<span class="number">0</span>), faceFeature2);</span><br><span class="line">                <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"特征值大小："</span> + faceFeature2.get<span class="constructor">FeatureData()</span>.length);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//特征比对</span></span><br><span class="line">                FaceFeature targetFaceFeature = <span class="keyword">new</span> <span class="constructor">FaceFeature()</span>;</span><br><span class="line">                targetFaceFeature.set<span class="constructor">FeatureData(<span class="params">faceFeature</span>.<span class="params">getFeatureData</span>()</span>);</span><br><span class="line">                FaceFeature sourceFaceFeature = <span class="keyword">new</span> <span class="constructor">FaceFeature()</span>;</span><br><span class="line">                sourceFaceFeature.set<span class="constructor">FeatureData(<span class="params">faceFeature2</span>.<span class="params">getFeatureData</span>()</span>);</span><br><span class="line">                FaceSimilar faceSimilar = <span class="keyword">new</span> <span class="constructor">FaceSimilar()</span>;</span><br><span class="line"></span><br><span class="line">                errorCode = faceEngine.compare<span class="constructor">FaceFeature(<span class="params">targetFaceFeature</span>, <span class="params">sourceFaceFeature</span>, <span class="params">faceSimilar</span>)</span>;</span><br><span class="line">                score = faceSimilar.get<span class="constructor">Score()</span>;</span><br><span class="line">                <span class="keyword">if</span>(score &gt; <span class="number">0.8</span>f)&#123;<span class="comment">//相似度判断</span></span><br><span class="line">                    <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"相似度："</span> + score);</span><br><span class="line">                    file.delete<span class="literal">()</span>;</span><br><span class="line">                    <span class="comment">//引擎卸载</span></span><br><span class="line">                    errorCode = faceEngine.un<span class="constructor">Init()</span>;</span><br><span class="line">                    return user;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"相似度："</span> + score);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        file.delete<span class="literal">()</span>;</span><br><span class="line">        <span class="comment">//引擎卸载</span></span><br><span class="line">        errorCode = faceEngine.un<span class="constructor">Init()</span>;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-前端界面展示"><a href="#2-4-前端界面展示" class="headerlink" title="2.4 前端界面展示"></a>2.4 前端界面展示</h2><p>userAddFace.jsp:面部信息录入</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby">@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=utf-8"</span></span></span><br><span class="line"><span class="ruby">    pageEncoding=<span class="string">"utf-8"</span></span><span class="xml">%&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby">@taglib uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> prefix=<span class="string">"c"</span> </span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="meta-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>面部信息录入<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/layui/jquery-3.2.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span></span></span></span><br><span class="line"><span class="xml">          href="$&#123;pageContext.request.contextPath&#125;/layui/css/layui.css"&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/layui/layui.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"padding: 25px; font-size: 20px;"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">center</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row layui-col-space10"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"layui-form-label"</span> <span class="attr">style</span>=<span class="string">"width: 150px;"</span>&gt;</span>登录密码：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"layui-input"</span> <span class="attr">id</span>=<span class="string">"loginPwd"</span> <span class="attr">lay-verify</span>=<span class="string">"required"</span> <span class="attr">style</span>=<span class="string">"width: 200px;"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">style</span>=<span class="string">"width: 500px;height: 380px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-col-md12"</span> &gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"layui-btn layui-btn-fluid layui-btn-radius"</span> <span class="attr">onclick</span>=<span class="string">"faceLogin()"</span> <span class="attr">value</span>=<span class="string">"录入面部信息"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">center</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          var video = document.getElementById('video');</span></span><br><span class="line"><span class="xml">          var canvas = document.getElementById('canvas');</span></span><br><span class="line"><span class="xml">          var context = canvas.getContext('2d');</span></span><br><span class="line"><span class="xml">          var mediaStreamTrack=null;</span></span><br><span class="line"><span class="xml">          if (navigator.mediaDevices.getUserMedia) &#123;</span></span><br><span class="line"><span class="xml">              //最新的标准API</span></span><br><span class="line"><span class="xml">              navigator.mediaDevices.getUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;).then(success).catch(error);</span></span><br><span class="line"><span class="xml">          &#125; else if (navigator.webkitGetUserMedia) &#123;</span></span><br><span class="line"><span class="xml">              //webkit核心浏览器</span></span><br><span class="line"><span class="xml">              navigator.webkitGetUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;,success, error)</span></span><br><span class="line"><span class="xml">          &#125; else if (navigator.mozGetUserMedia) &#123;</span></span><br><span class="line"><span class="xml">              //firfox浏览器</span></span><br><span class="line"><span class="xml">              navigator.mozGetUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;, success, error);</span></span><br><span class="line"><span class="xml">          &#125; else if (navigator.getUserMedia) &#123;</span></span><br><span class="line"><span class="xml">              //旧版API</span></span><br><span class="line"><span class="xml">              navigator.getUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;, success, error);</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">          function success(stream) &#123;</span></span><br><span class="line"><span class="xml">              //兼容webkit核心浏览器</span></span><br><span class="line"><span class="xml">              // let CompatibleURL = window.URL || window.webkitURL;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">              //将视频流设置为video元素的源</span></span><br><span class="line"><span class="xml">              console.log(stream);</span></span><br><span class="line"></span><br><span class="line"><span class="xml">              //video.src = CompatibleURL.createObjectURL(stream);</span></span><br><span class="line"><span class="xml">              video.srcObject = stream;</span></span><br><span class="line"><span class="xml">              video.play();</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">          //失败回调</span></span><br><span class="line"><span class="xml">          function error(error) &#123;</span></span><br><span class="line"><span class="xml">              console.log("访问用户媒体设备失败");</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">          //开启摄像头</span></span><br><span class="line"><span class="xml">          if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) &#123;</span></span><br><span class="line"><span class="xml">              getUserMedia(&#123;video:&#123;width:500,height:500&#125;&#125;,success,error)</span></span><br><span class="line"><span class="xml">          &#125;else&#123;</span></span><br><span class="line"><span class="xml">              alert('你的浏览器不支持访问用户媒体设备');</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">          function getFace() &#123;</span></span><br><span class="line"><span class="xml">              context.drawImage(video,0,0,300,150);</span></span><br><span class="line"><span class="xml">              this.img=canvas.toDataURL('image/jpg')</span></span><br><span class="line"><span class="xml">              //获取完整的base64编码</span></span><br><span class="line"><span class="xml">              this.img=img.split(',')[1];</span></span><br><span class="line"><span class="xml">              return this.img;</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">          function  offUserMedia() &#123;</span></span><br><span class="line"><span class="xml">              if(mediaStreamTrack!=null)</span></span><br><span class="line"><span class="xml">                  mediaStreamTrack.getTracks()[0].stop();</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">          function faceLogin() &#123;</span></span><br><span class="line"><span class="xml">              var imgpath = getFace();</span></span><br><span class="line"><span class="xml">              var userId = '$&#123;user.userId&#125;';</span></span><br><span class="line"><span class="xml">              var loginPwd = $("#loginPwd").val();</span></span><br><span class="line"><span class="xml">              $.ajax(&#123;</span></span><br><span class="line"><span class="xml">                  data : &#123;</span></span><br><span class="line"><span class="xml">                      "userId":userId,</span></span><br><span class="line"><span class="xml">                      "loginPwd":loginPwd,</span></span><br><span class="line"><span class="xml">                      "faceImg":imgpath</span></span><br><span class="line"><span class="xml">                  &#125;,</span></span><br><span class="line"><span class="xml">                  type : "post",</span></span><br><span class="line"><span class="xml">                  dataType : 'json',</span></span><br><span class="line"><span class="xml">                  url : "$&#123;pageContext.request.contextPath&#125;/userAction_addFace",</span></span><br><span class="line"><span class="xml">                  success : function(data) &#123;</span></span><br><span class="line"><span class="xml">                      if (data.code == 200) &#123;</span></span><br><span class="line"><span class="xml">                          alert("面部信息录入成功");</span></span><br><span class="line"><span class="xml">                          window.parent.location.reload();</span></span><br><span class="line"><span class="xml">                      &#125;else if(data.code==100)&#123;</span></span><br><span class="line"><span class="xml">                          alert("登录密码输入错误");</span></span><br><span class="line"><span class="xml">                          $("#loginPwd").val("");</span></span><br><span class="line"><span class="xml">                      &#125; else &#123;</span></span><br><span class="line"><span class="xml">                          alert("面部信息录入失败");</span></span><br><span class="line"><span class="xml">                      &#125;</span></span><br><span class="line"><span class="xml">                  &#125;</span></span><br><span class="line"><span class="xml">              &#125;);</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>faceLogin.jsp:刷脸登录</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=utf-8"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">pageEncoding</span>=<span class="string">"utf-8"</span>%&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="meta-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>万家登录<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/layui/jquery-3.2.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">href</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/layui/css/layui.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/layui/layui.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">'text/css'</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-id">#code</span> &#123;</span></span><br><span class="line">	font-family: Arial, 宋体;</span><br><span class="line">	font-style: italic;</span><br><span class="line">	color: green;</span><br><span class="line">	border: 0;</span><br><span class="line">	padding: 2px 3px;</span><br><span class="line">	letter-spacing: 3px;</span><br><span class="line">	font-weight: bolder;</span><br><span class="line">	font-size: 25px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"text-align: center"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--------------------------导航栏----------------------------&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"layui-nav layui-bg-cyan"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"layui-nav-item"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">style</span>=<span class="string">"font-size: 30px;font-weight: bold; font-family:楷体;"</span>&gt;</span>万家<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"layui-nav-item"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/page_indexUI"</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"layui-nav-item"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/userUI_login"</span>&gt;</span>密码登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"layui-nav-item layui-this"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/userUI_faceLogin"</span>&gt;</span>刷脸登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"layui-nav-item"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/userUI_register"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"layui-nav-item"</span>&gt;</span><span class="tag">&lt;<span class="name">i</span></span></span><br><span class="line"><span class="tag">			<span class="attr">class</span>=<span class="string">"layui-icon layui-icon-cellphone"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">style</span>=<span class="string">"color: #FFFFFF; margin-left: 100px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>热线电话：029-88888888<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--------------------------轮播图----------------------------&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-carousel"</span> <span class="attr">id</span>=<span class="string">"test1"</span> <span class="attr">style</span>=<span class="string">"z-index: -1;"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">carousel-item</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/1.jpg"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/2.jpg"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/3.jpg"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/4.jpg"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!--------------------------登录框----------------------------&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row layui-col-space30"</span> <span class="attr">style</span>=<span class="string">"margin-top: -600px;"</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 占4格，往右移动4格（等于在中间），背景色灰色 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">			<span class="attr">class</span>=<span class="string">"layui-col-md4 layui-col-md-offset4 layui-bg-gray layui-anim layui-anim-scale"</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 标题占12格 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-col-md12"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><br><span class="line">						<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"layui-icon layui-icon-release"</span></span></span><br><span class="line"><span class="tag">							<span class="attr">style</span>=<span class="string">"font-size: 40px; color: #2F4056; margin-right: 10px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>万家</span><br><span class="line">						LoginPage</span><br><span class="line">					<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 两个占12格表单 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row layui-col-space10"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-col-md12"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">class</span>=<span class="string">"layui-col-md12"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-col-md12"</span> &gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"layui-btn layui-btn-fluid layui-btn-radius"</span> <span class="attr">onclick</span>=<span class="string">"faceLogin()"</span> <span class="attr">value</span>=<span class="string">"登录"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--------------------------底部----------------------------&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-container"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">style</span>=<span class="string">"background-color: #FFFFFF; margin-top: 150px;"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"layui-breadcrumb"</span> <span class="attr">lay-separator</span>=<span class="string">"|"</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">			<span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>© 万家 租房<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>娱乐<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">			<span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>八卦<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>体育<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">			<span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>搞笑<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>视频<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">			<span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>游戏<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>综艺<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">		<span class="comment">//注意：导航 依赖 element 模块，否则无法进行功能性操作</span></span></span><br><span class="line"><span class="actionscript">		layui.use(<span class="string">'element'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> element = layui.element;</span></span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line"><span class="actionscript">		layui.use(<span class="string">'carousel'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> carousel = layui.carousel;</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//建造实例</span></span></span><br><span class="line">			carousel.render(&#123;</span><br><span class="line"><span class="actionscript">				elem : <span class="string">'#test1'</span>,</span></span><br><span class="line"><span class="actionscript">				width : <span class="string">'100%'</span>,</span></span><br><span class="line"><span class="actionscript">				height : <span class="string">'700px'</span>,</span></span><br><span class="line"><span class="actionscript">				anim : <span class="string">'fade'</span>,</span></span><br><span class="line"><span class="actionscript">				indicator : <span class="string">'none'</span>,</span></span><br><span class="line"><span class="actionscript">				arrow : <span class="string">'none'</span></span></span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;);</span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> video = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>);</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span></span><br><span class="line"><span class="actionscript">		<span class="keyword">var</span> context = canvas.getContext(<span class="string">'2d'</span>);</span></span><br><span class="line"><span class="actionscript">		<span class="keyword">var</span> mediaStreamTrack=<span class="literal">null</span>;</span></span><br><span class="line">		if (navigator.mediaDevices.getUserMedia) &#123;</span><br><span class="line"><span class="actionscript">			<span class="comment">//最新的标准API</span></span></span><br><span class="line">			navigator.mediaDevices.getUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;).then(success).catch(error);</span><br><span class="line"><span class="actionscript">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (navigator.webkitGetUserMedia) &#123;</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//webkit核心浏览器</span></span></span><br><span class="line">			navigator.webkitGetUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;,success, error)</span><br><span class="line"><span class="actionscript">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (navigator.mozGetUserMedia) &#123;</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//firfox浏览器</span></span></span><br><span class="line">			navigator.mozGetUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;, success, error);</span><br><span class="line"><span class="actionscript">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (navigator.getUserMedia) &#123;</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//旧版API</span></span></span><br><span class="line">			navigator.getUserMedia(&#123;video : &#123;width: 1000, height: 1000&#125;&#125;, success, error);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">		<span class="function"><span class="keyword">function</span> <span class="title">success</span><span class="params">(stream)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//兼容webkit核心浏览器</span></span></span><br><span class="line"><span class="actionscript">			<span class="comment">// let CompatibleURL = window.URL || window.webkitURL;</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">			<span class="comment">//将视频流设置为video元素的源</span></span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(stream);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">			<span class="comment">//video.src = CompatibleURL.createObjectURL(stream);</span></span></span><br><span class="line">			video.srcObject = stream;</span><br><span class="line">			video.play();</span><br><span class="line">		&#125;</span><br><span class="line"><span class="actionscript">		<span class="comment">//失败回调</span></span></span><br><span class="line"><span class="actionscript">		<span class="function"><span class="keyword">function</span> <span class="title">error</span><span class="params">(error)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(<span class="string">"访问用户媒体设备失败"</span>);</span></span><br><span class="line">		&#125;</span><br><span class="line"><span class="actionscript">		<span class="comment">//开启摄像头</span></span></span><br><span class="line">		if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) &#123;</span><br><span class="line">			getUserMedia(&#123;video:&#123;width:500,height:500&#125;&#125;,success,error)</span><br><span class="line"><span class="actionscript">		&#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="actionscript">			alert(<span class="string">'你的浏览器不支持访问用户媒体设备'</span>);</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">		<span class="function"><span class="keyword">function</span> <span class="title">getFace</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line">			context.drawImage(video,0,0,300,150);</span><br><span class="line"><span class="actionscript">			<span class="keyword">this</span>.img=canvas.toDataURL(<span class="string">'image/jpg'</span>)</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//获取完整的base64编码</span></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">this</span>.img=img.split(<span class="string">','</span>)[<span class="number">1</span>];</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">return</span> <span class="keyword">this</span>.img;</span></span><br><span class="line">		&#125;</span><br><span class="line"><span class="actionscript">		<span class="function"><span class="keyword">function</span>  <span class="title">offUserMedia</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">if</span>(mediaStreamTrack!=<span class="literal">null</span>)</span></span><br><span class="line">				mediaStreamTrack.getTracks()[0].stop();</span><br><span class="line">		&#125;</span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">faceLogin</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> imgpath = getFace();</span></span><br><span class="line"><span class="javascript">			$.ajax(&#123;</span></span><br><span class="line">				data : &#123;</span><br><span class="line"><span class="actionscript">					<span class="string">"faceImg"</span>:imgpath</span></span><br><span class="line">				&#125;,</span><br><span class="line"><span class="actionscript">				type : <span class="string">"post"</span>,</span></span><br><span class="line"><span class="actionscript">				dataType : <span class="string">'json'</span>,</span></span><br><span class="line"><span class="actionscript">				url : <span class="string">"$&#123;pageContext.request.contextPath&#125;/userAction_jsonLogin"</span>,</span></span><br><span class="line"><span class="actionscript">				success : <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span></span><br><span class="line">					if (data.code == 200) &#123;</span><br><span class="line">						if (data.type == 3) &#123;</span><br><span class="line"><span class="javascript">							<span class="built_in">window</span>.location.href=<span class="string">"$&#123;pageContext.request.contextPath&#125;/page_adminUI"</span>;</span></span><br><span class="line"><span class="actionscript">						&#125;<span class="keyword">else</span> <span class="keyword">if</span>(data.type == <span class="number">2</span>)&#123;</span></span><br><span class="line"><span class="javascript">                            <span class="built_in">window</span>.location.href=<span class="string">"$&#123;pageContext.request.contextPath&#125;/page_admin"</span>;</span></span><br><span class="line"><span class="actionscript">						&#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                            <span class="built_in">window</span>.location.href=<span class="string">"$&#123;pageContext.request.contextPath&#125;/page_indexUI"</span>;</span></span><br><span class="line">						&#125;</span><br><span class="line"><span class="actionscript">					&#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="actionscript">                        alert(<span class="string">"刷脸登录失败：面部识别不匹配"</span>);</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>前端界面展示的js和css下载：<a href="https://www.layui.com/">LayUI</a></p>
+<h2 id="2-5-测试"><a href="#2-5-测试" class="headerlink" title="2.5 测试"></a>2.5 测试</h2><p>面部信息录入界面展示：</p>
+<img src="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/1586750158489.png" class title="加载图片中">
+
+<p>登录界面展示：</p>
+<img src="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/1586750066135.png" class title="加载图片中">
+
+<p>到此，人脸识别整合系统登录完成。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%EF%BC%8CSDK/" rel="tag">人脸识别，SDK</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/08/git-api/">
+                <span class="level-item">git-api</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'FoP6lhnotTaDXjAyKMytVe5P-gzGzoHsz',
+        app_key: 'qvAdXiqKGPA0XjzLqT120wfS',
+        placeholder: '要不要说点啥...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/fh.jpg" alt="冯皓">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        冯皓
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java软件开发工程师
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>陕西 西安</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            6
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/fh0725" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/fh0725">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://surpass.org.cn/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Surpasser</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">surpass.org.cn</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/springboot/">
+            <span class="level-start">
+                <span class="level-item">springboot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%90%AD%E5%BB%BA/">
+            <span class="level-start">
+                <span class="level-item">搭建</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%95%B4%E5%90%88/">
+            <span class="level-start">
+                <span class="level-item">整合</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/6.jpg" alt="人脸识别离线SDK整合系统（虹软）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T02:49:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">人脸识别离线SDK整合系统（虹软）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B4%E5%90%88/">整合</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/08/git-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/5.jpg" alt="git-api">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T06:32:39.000Z">2020-04-08</time></div>
+                    <a href="/2020/04/08/git-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git-api</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd实现消息订阅、发布、退订">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd实现消息订阅、发布、退订</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd服务搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T03:30:05.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd服务搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/1.jpg" alt="小白初入Hexo">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T09:03:48.000Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="title has-link-black-ter is-size-6 has-text-weight-normal">小白初入Hexo</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git-api/">
+                        <span class="tag">Git-api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd/">
+                        <span class="tag">emqttd</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd%E6%90%AD%E5%BB%BA/">
+                        <span class="tag">emqttd搭建</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/">
+                        <span class="tag">hexo搭建，博客</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%EF%BC%8CSDK/">
+                        <span class="tag">人脸识别，SDK</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/6.jpg" alt="人脸识别离线SDK整合系统（虹软）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T02:49:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">人脸识别离线SDK整合系统（虹软）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B4%E5%90%88/">整合</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/08/git-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/5.jpg" alt="git-api">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T06:32:39.000Z">2020-04-08</time></div>
+                    <a href="/2020/04/08/git-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git-api</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd实现消息订阅、发布、退订">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd实现消息订阅、发布、退订</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd服务搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T03:30:05.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd服务搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/1.jpg" alt="小白初入Hexo">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T09:03:48.000Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/%E5%B0%8F%E7%99%BD%E5%88%9D%E5%85%A5Hexo/" class="title has-link-black-ter is-size-6 has-text-weight-normal">小白初入Hexo</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git-api/">
+                        <span class="tag">Git-api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd/">
+                        <span class="tag">emqttd</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd%E6%90%AD%E5%BB%BA/">
+                        <span class="tag">emqttd搭建</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/">
+                        <span class="tag">hexo搭建，博客</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%EF%BC%8CSDK/">
+                        <span class="tag">人脸识别，SDK</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="人脸识别离线SDK整合系统（虹软）" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 冯皓&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://ppoffice.github.io/hexo-theme-icarus">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/fh0725">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://fh0725.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
