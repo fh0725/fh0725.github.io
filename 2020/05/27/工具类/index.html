@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>工具类 - 程序员的江湖</title>
+
+
+    <meta name="description" content="1 前言简单的几个工具类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具类">
+<meta property="og:url" content="http://fh0725.github.io/2020/05/27/%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+<meta property="og:site_name" content="程序员的江湖">
+<meta property="og:description" content="1 前言简单的几个工具类">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fh0725.github.io/gallery/7.jpg">
+<meta property="article:published_time" content="2020-05-27T07:58:49.000Z">
+<meta property="article:modified_time" content="2020-05-27T08:09:48.944Z">
+<meta property="article:author" content="冯皓">
+<meta property="article:tag" content="工具类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fh0725.github.io/gallery/7.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="工具类" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/fh0725">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/gallery/7.jpg" alt="工具类">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-27T07:58:49.000Z">2020-05-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 分钟 读完 (大约 2537 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                工具类
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>简单的几个工具类</p>
+<a id="more"></a>
+
+<h1 id="2-工具类"><a href="#2-工具类" class="headerlink" title="2 工具类"></a>2 工具类</h1><h3 id="1-Excel导入导出工具类"><a href="#1-Excel导入导出工具类" class="headerlink" title="1.Excel导入导出工具类"></a>1.Excel导入导出工具类</h3><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.empl.mgr.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.empl.mgr.dto.EmployeesBasicInfoDto;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.poifs.filesystem.POIFSFileSystem;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.formula.functions.T;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.util.CellRangeAddress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.URLEncoder;</span><br><span class="line"><span class="keyword">import</span> java.<span class="built_in">text</span>.DecimalFormat;</span><br><span class="line"><span class="keyword">import</span> java.<span class="built_in">text</span>.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author fenghao</span></span><br><span class="line"><span class="comment"> * @Title: ExcelUtil</span></span><br><span class="line"><span class="comment"> * @Description: Excel工具类</span></span><br><span class="line"><span class="comment"> * @date 2020/05/0717:30</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> class ExcelUtil &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Excel表格导出</span></span><br><span class="line"><span class="comment">     * @param excelData Excel表格的数据，封装为List&lt;List&lt;String&gt;&gt;</span></span><br><span class="line"><span class="comment">     * @param sheetName sheet的名字</span></span><br><span class="line"><span class="comment">     * @param fileName 导出Excel的文件名</span></span><br><span class="line"><span class="comment">     * @throws Exception 抛异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> exportReportExcel(HttpServletResponse response,List&lt;List&lt;<span class="keyword">String</span>&gt;&gt; excelData,</span><br><span class="line">                                         <span class="keyword">String</span> sheetName, <span class="keyword">String</span> fileName) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//声明一个工作簿</span></span><br><span class="line">        HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成一个表格，设置表格名称</span></span><br><span class="line">        HSSFSheet sheet = workbook.createSheet(sheetName);</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">8</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">11</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">12</span>, <span class="number">14</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">15</span>, <span class="number">17</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">18</span>, <span class="number">22</span>));</span><br><span class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">23</span>, <span class="number">24</span>));</span><br><span class="line">        <span class="comment">//设置表格列宽度</span></span><br><span class="line">        sheet.setDefaultColumnWidth(<span class="number">12</span>);</span><br><span class="line">        sheet.setDefaultRowHeightInPoints(<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        CellStyle style = workbook.createCellStyle();</span><br><span class="line">        <span class="comment">// 设置样式</span></span><br><span class="line">        style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());</span><br><span class="line">        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">        style.setBorderBottom(BorderStyle.THIN);</span><br><span class="line">        style.setBorderLeft(BorderStyle.THIN);</span><br><span class="line">        style.setBorderRight(BorderStyle.THIN);</span><br><span class="line">        style.setBorderTop(BorderStyle.THIN);</span><br><span class="line">        style.setAlignment(HorizontalAlignment.CENTER);</span><br><span class="line">        style.setVerticalAlignment(VerticalAlignment.CENTER);</span><br><span class="line">        <span class="comment">// 生成一个字体</span></span><br><span class="line">        Font font = workbook.<span class="built_in">createFont</span>();</span><br><span class="line">        font.setColor(IndexedColors.BLACK.getIndex());</span><br><span class="line">        font.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">10</span>);</span><br><span class="line">        font.setBold(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 把字体应用到当前的样式</span></span><br><span class="line">        style.setFont(font);</span><br><span class="line">        <span class="comment">// 生成并设置第二个样式</span></span><br><span class="line">        CellStyle style2 = workbook.createCellStyle();</span><br><span class="line">        style2.setFillForegroundColor(IndexedColors.WHITE.getIndex());</span><br><span class="line">        style2.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">        style2.setBorderBottom(BorderStyle.THIN);</span><br><span class="line">        style2.setBorderLeft(BorderStyle.THIN);</span><br><span class="line">        style2.setBorderRight(BorderStyle.THIN);</span><br><span class="line">        style2.setBorderTop(BorderStyle.THIN);</span><br><span class="line">        style2.setAlignment(HorizontalAlignment.CENTER);</span><br><span class="line">        style2.setVerticalAlignment(VerticalAlignment.CENTER);</span><br><span class="line">        <span class="comment">// 生成第二种字体</span></span><br><span class="line">        Font font2 = workbook.<span class="built_in">createFont</span>();</span><br><span class="line">        font2.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">8</span>);</span><br><span class="line">        <span class="comment">// 把字体应用到当前的样式</span></span><br><span class="line">        style2.setFont(font2);</span><br><span class="line">        <span class="comment">// 生成并设置第三个样式</span></span><br><span class="line">        CellStyle style3 = workbook.createCellStyle();</span><br><span class="line">        style3.setFillForegroundColor(IndexedColors.CORAL.getIndex());</span><br><span class="line">        style3.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">        style3.setBorderBottom(BorderStyle.THIN);</span><br><span class="line">        style3.setBorderLeft(BorderStyle.THIN);</span><br><span class="line">        style3.setBorderRight(BorderStyle.THIN);</span><br><span class="line">        style3.setBorderTop(BorderStyle.THIN);</span><br><span class="line">        style3.setAlignment(HorizontalAlignment.CENTER);</span><br><span class="line">        style3.setVerticalAlignment(VerticalAlignment.CENTER);</span><br><span class="line">        <span class="comment">// 生成第三种字体</span></span><br><span class="line">        Font font3 = workbook.<span class="built_in">createFont</span>();</span><br><span class="line">        font3.setColor(IndexedColors.RED.getIndex());</span><br><span class="line">        font3.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">9</span>);</span><br><span class="line">        <span class="comment">// 把字体应用到当前的样式</span></span><br><span class="line">        style3.setFont(font3);</span><br><span class="line">        <span class="comment">//写入List&lt;List&lt;String&gt;&gt;中的数据</span></span><br><span class="line">        <span class="built_in">int</span> rowIndex = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(List&lt;<span class="keyword">String</span>&gt; data : excelData)&#123;</span><br><span class="line">            <span class="comment">//创建一个row行，然后自增1</span></span><br><span class="line">            HSSFRow row = sheet.createRow(rowIndex++);</span><br><span class="line">            <span class="comment">//遍历添加本行数据</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; data.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="comment">//创建一个单元格</span></span><br><span class="line">                HSSFCell cell = row.createCell(i);</span><br><span class="line">                <span class="keyword">if</span>(rowIndex == <span class="number">1</span> || rowIndex == <span class="number">2</span>)&#123;</span><br><span class="line">                    cell.setCellStyle(style);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(rowIndex == excelData.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                    cell.setCellStyle(style3);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    cell.setCellStyle(style2);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//创建一个内容对象</span></span><br><span class="line">                HSSFRichTextString <span class="built_in">text</span> = <span class="keyword">new</span> HSSFRichTextString(data.<span class="built_in">get</span>(i));</span><br><span class="line">                <span class="comment">//将内容对象的文字内容写入到单元格中</span></span><br><span class="line">                cell.setCellValue(<span class="built_in">text</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//输出流</span></span><br><span class="line">        OutputStream output = response.getOutputStream();</span><br><span class="line">        response.setContentType(<span class="string">"application/vnd.ms-excel"</span>);</span><br><span class="line">        fileName = URLEncoder.encode(fileName, <span class="string">"UTF-8"</span>);</span><br><span class="line">        <span class="comment">//设置导出Excel的名称</span></span><br><span class="line">        response.setHeader(<span class="string">"Content-disposition"</span>, <span class="string">"attachment;filename="</span> + fileName);</span><br><span class="line">        <span class="comment">/*FileOutputStream output = new FileOutputStream( "D:\\"+fileName);*/</span></span><br><span class="line">        <span class="comment">//workbook将Excel写入到response的输出流中，供页面下载该Excel文件</span></span><br><span class="line">        workbook.write(output);</span><br><span class="line">        output.close();</span><br><span class="line">        <span class="comment">//关闭workbook</span></span><br><span class="line">        workbook.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Excel表格导出</span></span><br><span class="line"><span class="comment">     * @param response HttpServletResponse对象</span></span><br><span class="line"><span class="comment">     * @param excelData Excel表格的数据，封装为List&lt;List&lt;String&gt;&gt;</span></span><br><span class="line"><span class="comment">     * @param sheetName sheet的名字</span></span><br><span class="line"><span class="comment">     * @param fileName 导出Excel的文件名</span></span><br><span class="line"><span class="comment">     * @throws Exception 抛异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> exportExcel(HttpServletResponse response,</span><br><span class="line">                                   List&lt;List&lt;<span class="keyword">String</span>&gt;&gt; excelData,</span><br><span class="line">                                   <span class="keyword">String</span> sheetName,</span><br><span class="line">                                   <span class="keyword">String</span> fileName) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//声明一个工作簿</span></span><br><span class="line">        HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成一个表格，设置表格名称</span></span><br><span class="line">        HSSFSheet sheet = workbook.createSheet(sheetName);</span><br><span class="line">        <span class="comment">//设置表格列宽度</span></span><br><span class="line">        sheet.setDefaultColumnWidth(<span class="number">18</span>);</span><br><span class="line">        sheet.setDefaultRowHeightInPoints(<span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">        CellStyle style = style(workbook);</span><br><span class="line">        <span class="comment">// 生成并设置另一个样式 内容的背景</span></span><br><span class="line">        CellStyle style2 = style2(workbook,<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//写入List&lt;List&lt;String&gt;&gt;中的数据</span></span><br><span class="line">        <span class="built_in">int</span> rowIndex = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(List&lt;<span class="keyword">String</span>&gt; data : excelData)&#123;</span><br><span class="line">            <span class="comment">//创建一个row行，然后自增1</span></span><br><span class="line">            HSSFRow row = sheet.createRow(rowIndex++);</span><br><span class="line">            <span class="comment">//遍历添加本行数据</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; data.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="comment">//创建一个单元格</span></span><br><span class="line">                HSSFCell cell = row.createCell(i);</span><br><span class="line">                <span class="keyword">if</span>(rowIndex == <span class="number">1</span>)&#123;</span><br><span class="line">                    cell.setCellStyle(style);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    cell.setCellStyle(style2);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//创建一个内容对象</span></span><br><span class="line">                HSSFRichTextString <span class="built_in">text</span> = <span class="keyword">new</span> HSSFRichTextString(data.<span class="built_in">get</span>(i));</span><br><span class="line">                <span class="comment">//将内容对象的文字内容写入到单元格中</span></span><br><span class="line">                cell.setCellValue(<span class="built_in">text</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//输出流</span></span><br><span class="line">        OutputStream output = response.getOutputStream();</span><br><span class="line">        response.setContentType(<span class="string">"application/vnd.ms-excel"</span>);</span><br><span class="line">        fileName = URLEncoder.encode(fileName, <span class="string">"UTF-8"</span>);</span><br><span class="line">        <span class="comment">//设置导出Excel的名称</span></span><br><span class="line">        response.setHeader(<span class="string">"Content-disposition"</span>, <span class="string">"attachment;filename="</span> + fileName);</span><br><span class="line">        <span class="comment">/*FileOutputStream output = new FileOutputStream( "D:\\"+fileName);*/</span></span><br><span class="line">        <span class="comment">//workbook将Excel写入到response的输出流中，供页面下载该Excel文件</span></span><br><span class="line">        workbook.write(output);</span><br><span class="line">        output.close();</span><br><span class="line">        <span class="comment">//关闭workbook</span></span><br><span class="line">        workbook.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CellStyle style2(HSSFWorkbook workbook,<span class="built_in">int</span> type)&#123;</span><br><span class="line">        CellStyle style2 = workbook.createCellStyle();</span><br><span class="line">        style2.setFillForegroundColor(IndexedColors.WHITE.getIndex());</span><br><span class="line">        style2.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">        style2.setBorderBottom(BorderStyle.THIN);</span><br><span class="line">        style2.setBorderLeft(BorderStyle.THIN);</span><br><span class="line">        style2.setBorderRight(BorderStyle.THIN);</span><br><span class="line">        style2.setBorderTop(BorderStyle.THIN);</span><br><span class="line">        style2.setAlignment(HorizontalAlignment.CENTER);</span><br><span class="line">        style2.setVerticalAlignment(VerticalAlignment.CENTER);</span><br><span class="line">        <span class="comment">// 生成另一个字体</span></span><br><span class="line">        Font font2 = workbook.<span class="built_in">createFont</span>();</span><br><span class="line">        <span class="keyword">if</span>(type == <span class="number">1</span>)&#123;</span><br><span class="line">            font2.setColor(IndexedColors.RED.getIndex());</span><br><span class="line">        &#125;</span><br><span class="line">        font2.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">10</span>);</span><br><span class="line">        <span class="comment">// 把字体应用到当前的样式</span></span><br><span class="line">        style2.setFont(font2);</span><br><span class="line">        <span class="keyword">return</span> style2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CellStyle style(HSSFWorkbook wb)&#123;</span><br><span class="line">        CellStyle style = wb.createCellStyle();</span><br><span class="line">        <span class="comment">// 设置样式</span></span><br><span class="line">        style.setFillForegroundColor(IndexedColors.GOLD.getIndex());</span><br><span class="line">        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);</span><br><span class="line">        style.setBorderBottom(BorderStyle.THIN);</span><br><span class="line">        style.setBorderLeft(BorderStyle.THIN);</span><br><span class="line">        style.setBorderRight(BorderStyle.THIN);</span><br><span class="line">        style.setBorderTop(BorderStyle.THIN);</span><br><span class="line">        style.setAlignment(HorizontalAlignment.CENTER);</span><br><span class="line">        style.setVerticalAlignment(VerticalAlignment.CENTER);</span><br><span class="line">        <span class="comment">// 生成一个字体</span></span><br><span class="line">        Font font = wb.<span class="built_in">createFont</span>();</span><br><span class="line">        font.setColor(IndexedColors.BLACK.getIndex());</span><br><span class="line">        font.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">12</span>);</span><br><span class="line">        font.setBold(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 把字体应用到当前的样式</span></span><br><span class="line">        style.setFont(font);</span><br><span class="line">        <span class="keyword">return</span> style;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span>[][] getArrData(File file, <span class="built_in">int</span> ignoreRows) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        List&lt;<span class="keyword">String</span>[]&gt; result = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>[]&gt;();</span><br><span class="line">        <span class="built_in">int</span> rowSize = <span class="number">0</span>;</span><br><span class="line">        BufferedInputStream in = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">        <span class="comment">// 打开HSSFWorkbook</span></span><br><span class="line">        POIFSFileSystem fs = <span class="keyword">new</span> POIFSFileSystem(in);</span><br><span class="line">        HSSFWorkbook wb = <span class="keyword">new</span> HSSFWorkbook(fs);</span><br><span class="line">        HSSFCell cell = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> sheetIndex = <span class="number">0</span>; sheetIndex &lt; wb.getNumberOfSheets(); sheetIndex++) &#123;</span><br><span class="line">        HSSFSheet st = wb.getSheetAt(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 第一行为标题，不取</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> rowIndex = ignoreRows; rowIndex &lt;= st.getLastRowNum(); rowIndex++) &#123;</span><br><span class="line">            HSSFRow row = st.getRow(rowIndex);</span><br><span class="line">            <span class="keyword">if</span> (row == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">int</span> tempRowSize = row.getLastCellNum();</span><br><span class="line">            <span class="keyword">if</span> (tempRowSize &gt; rowSize) &#123;</span><br><span class="line">                rowSize = tempRowSize;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">String</span>[] values = <span class="keyword">new</span> <span class="keyword">String</span>[rowSize];</span><br><span class="line">            Arrays.<span class="built_in">fill</span>(values, <span class="string">""</span>);</span><br><span class="line">            <span class="built_in">boolean</span> hasValue = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">short</span> columnIndex = <span class="number">0</span>; columnIndex &lt; row.getLastCellNum(); columnIndex++) &#123;</span><br><span class="line">                <span class="keyword">String</span> value = <span class="string">""</span>;</span><br><span class="line">                cell = row.getCell(columnIndex);</span><br><span class="line">                <span class="keyword">if</span> (cell != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 注意：一定要设成这个，否则可能会出现乱码</span></span><br><span class="line">                    <span class="comment">// cell.setEncoding(HSSFCell.ENCODING_UTF_16);</span></span><br><span class="line">                    <span class="keyword">switch</span> (cell.getCellTypeEnum()) &#123;</span><br><span class="line">                        <span class="keyword">case</span> STRING:</span><br><span class="line">                            value = cell.getStringCellValue();</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">case</span> NUMERIC:</span><br><span class="line">                            <span class="keyword">if</span> (HSSFDateUtil.isCellDateFormatted(cell)) &#123;</span><br><span class="line">                                Date date = cell.getDateCellValue();</span><br><span class="line">                                <span class="keyword">if</span> (date != <span class="keyword">null</span>) &#123;</span><br><span class="line">                                    value = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>)</span><br><span class="line">                                            .format(date);</span><br><span class="line">                                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                    value = <span class="string">""</span>;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                value = <span class="keyword">new</span> DecimalFormat(<span class="string">"0"</span>).format(cell</span><br><span class="line">                                        .getNumericCellValue());</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">case</span> FORMULA:</span><br><span class="line">                            <span class="comment">// 导入时如果为公式生成的数据则无值</span></span><br><span class="line">                            <span class="keyword">if</span> (!cell.getStringCellValue().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">                                value = cell.getStringCellValue();</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                value = cell.getNumericCellValue() + <span class="string">""</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">case</span> BLANK:</span><br><span class="line">                            value = <span class="string">""</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">case</span> ERROR:</span><br><span class="line">                            value = <span class="string">""</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">case</span> BOOLEAN:</span><br><span class="line">                            value = (cell.getBooleanCellValue() == <span class="keyword">true</span> ? <span class="string">"Y"</span></span><br><span class="line">                                    : <span class="string">"N"</span>);</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">default</span>:</span><br><span class="line">                            value = <span class="string">""</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (columnIndex == <span class="number">0</span> &amp;&amp; value.<span class="built_in">trim</span>().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                values[columnIndex] = rightTrim(value);</span><br><span class="line">                hasValue = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (hasValue) &#123;</span><br><span class="line">                result.<span class="built_in">add</span>(values);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        in.close();</span><br><span class="line">        <span class="keyword">String</span>[][] returnArray = <span class="keyword">new</span> <span class="keyword">String</span>[result.<span class="built_in">size</span>()][rowSize];</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; returnArray.length; i++) &#123;</span><br><span class="line">            returnArray[i] = (<span class="keyword">String</span>[]) result.<span class="built_in">get</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> returnArray;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 去掉字符串右边的空格</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @param str 要处理的字符串</span></span><br><span class="line"><span class="comment">     * @return 处理后的字符串</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> rightTrim(<span class="keyword">String</span> <span class="built_in">str</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">str</span> == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">int</span> length = <span class="built_in">str</span>.length();</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">str</span>.charAt(i) != <span class="number">0x20</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            length--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>.substring(<span class="number">0</span>, length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-时间工具类"><a href="#2-时间工具类" class="headerlink" title="2.时间工具类"></a>2.时间工具类</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line">package com.empl.mgr.utils;</span><br><span class="line"></span><br><span class="line">import java.math.BigDecimal;</span><br><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Calendar;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">import com.empl.mgr.constant.TimeFormatConstant;</span><br><span class="line">import com.empl.mgr.dto.DateDto;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line"></span><br><span class="line">public <span class="keyword">class</span> DateTimeUtil &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param:</span></span><br><span class="line"><span class="comment">     * @description: 获取当前时间</span></span><br><span class="line"><span class="comment">     * @return: java.util.Date</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/12</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static Date get<span class="constructor">CurrentTime()</span> &#123;</span><br><span class="line">        return <span class="keyword">new</span> <span class="constructor">Date()</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: date</span></span><br><span class="line"><span class="comment">     * @param: format</span></span><br><span class="line"><span class="comment">     * @description: long转String</span></span><br><span class="line"><span class="comment">     * @return: java.lang.String</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/12</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static String conversion<span class="constructor">Time(<span class="params">long</span> <span class="params">date</span>, String <span class="params">format</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="module-access"><span class="module"><span class="identifier">CompareUtil</span>.</span></span>is<span class="constructor">Empty(<span class="params">date</span>)</span><span class="operator"> || </span><span class="module-access"><span class="module"><span class="identifier">StringUtils</span>.</span></span>is<span class="constructor">Empty(<span class="params">format</span>)</span>)</span><br><span class="line">            return <span class="string">""</span>;</span><br><span class="line">        return <span class="keyword">new</span> <span class="constructor">SimpleDateFormat(<span class="params">format</span>)</span>.format(<span class="keyword">new</span> <span class="constructor">Date(<span class="params">date</span>)</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: date</span></span><br><span class="line"><span class="comment">     * @param: format</span></span><br><span class="line"><span class="comment">     * @description: Date转String</span></span><br><span class="line"><span class="comment">     * @return: java.lang.String</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/12</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static String date<span class="constructor">ToString(Date <span class="params">date</span>, String <span class="params">format</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="module-access"><span class="module"><span class="identifier">CompareUtil</span>.</span></span>is<span class="constructor">Empty(<span class="params">date</span>)</span><span class="operator"> || </span><span class="module-access"><span class="module"><span class="identifier">StringUtils</span>.</span></span>is<span class="constructor">Empty(<span class="params">format</span>)</span>)</span><br><span class="line">            return <span class="string">""</span>;</span><br><span class="line">        return <span class="keyword">new</span> <span class="constructor">SimpleDateFormat(<span class="params">format</span>)</span>.format(date);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: date</span></span><br><span class="line"><span class="comment">     * @param: format</span></span><br><span class="line"><span class="comment">     * @description: String转Date</span></span><br><span class="line"><span class="comment">     * @return: java.util.Date</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/12</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static Date <span class="built_in">string</span><span class="constructor">ToDate(String <span class="params">date</span>, String <span class="params">format</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="module-access"><span class="module"><span class="identifier">CompareUtil</span>.</span></span>is<span class="constructor">Empty(<span class="params">date</span>)</span><span class="operator"> || </span><span class="module-access"><span class="module"><span class="identifier">StringUtils</span>.</span></span>is<span class="constructor">Empty(<span class="params">format</span>)</span>)</span><br><span class="line">            return null;</span><br><span class="line">        Date time = null;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            time = <span class="keyword">new</span> <span class="constructor">SimpleDateFormat(<span class="params">format</span>)</span>.parse(date);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.print<span class="constructor">StackTrace()</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        return time;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: null</span></span><br><span class="line"><span class="comment">     * @description: 司龄计算</span></span><br><span class="line"><span class="comment">     * @return:</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/6</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static <span class="built_in">float</span> seniority<span class="constructor">Time(String <span class="params">date</span>)</span> &#123;</span><br><span class="line">        Date entryTime = <span class="built_in">string</span><span class="constructor">ToDate(<span class="params">date</span>, TimeFormatConstant.YYYY_MM_DD)</span>;</span><br><span class="line">        Date nowTime = get<span class="constructor">CurrentTime()</span>;</span><br><span class="line">        long dayNum = nowTime.get<span class="constructor">Time()</span> - entryTime.get<span class="constructor">Time()</span>;</span><br><span class="line">        <span class="built_in">float</span> time = dayNum<span class="operator"> / </span><span class="number">1000</span><span class="operator"> / </span><span class="number">60</span><span class="operator"> / </span><span class="number">60</span><span class="operator"> / </span><span class="number">24</span>;</span><br><span class="line">        time = time<span class="operator"> / </span><span class="number">365.5</span>f;</span><br><span class="line">        <span class="built_in">float</span> seniority = <span class="keyword">new</span> <span class="constructor">BigDecimal(<span class="params">time</span>)</span>.set<span class="constructor">Scale(1, BigDecimal.ROUND_HALF_UP)</span>.<span class="built_in">float</span><span class="constructor">Value()</span>;</span><br><span class="line">        return seniority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: idcard</span></span><br><span class="line"><span class="comment">     * @description: 根据身份证计算年龄</span></span><br><span class="line"><span class="comment">     * @return: java.lang.Integer</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/8</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static <span class="built_in">int</span> id<span class="constructor">CardToAge(String <span class="params">idcard</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">int</span> selectYear = <span class="module-access"><span class="module"><span class="identifier">Integer</span>.</span></span>value<span class="constructor">Of(<span class="params">idcard</span>.<span class="params">substring</span>(6, 10)</span>);         <span class="comment">//出生的年份</span></span><br><span class="line">        <span class="built_in">int</span> selectMonth = <span class="module-access"><span class="module"><span class="identifier">Integer</span>.</span></span>value<span class="constructor">Of(<span class="params">idcard</span>.<span class="params">substring</span>(10, 12)</span>);       <span class="comment">//出生的月份</span></span><br><span class="line">        <span class="built_in">int</span> selectDay = <span class="module-access"><span class="module"><span class="identifier">Integer</span>.</span></span>value<span class="constructor">Of(<span class="params">idcard</span>.<span class="params">substring</span>(12, 14)</span>);         <span class="comment">//出生的日期</span></span><br><span class="line">        Calendar cal = <span class="module-access"><span class="module"><span class="identifier">Calendar</span>.</span></span>get<span class="constructor">Instance()</span>;</span><br><span class="line">        <span class="built_in">int</span> yearMinus = cal.get(Calendar.YEAR) - selectYear;</span><br><span class="line">        <span class="built_in">int</span> monthMinus = cal.get(Calendar.MONTH) + <span class="number">1</span> - selectMonth;</span><br><span class="line">        <span class="built_in">int</span> dayMinus = cal.get(Calendar.DATE) - selectDay;</span><br><span class="line">        Integer age = yearMinus;</span><br><span class="line">        <span class="keyword">if</span> (yearMinus &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            age = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (yearMinus<span class="operator"> == </span><span class="number">0</span>) &#123;</span><br><span class="line">            age = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (yearMinus &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (monthMinus<span class="operator"> == </span><span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dayMinus &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    age = age - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (monthMinus &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                age = age + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: date</span></span><br><span class="line"><span class="comment">     * @param: months</span></span><br><span class="line"><span class="comment">     * @description: 获取添加月份的日期</span></span><br><span class="line"><span class="comment">     * @return: java.lang.String</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/12</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static String get<span class="constructor">AddMonthDate(String <span class="params">date</span>, <span class="params">int</span> <span class="params">months</span>)</span> &#123;</span><br><span class="line">        Date toDate = <span class="built_in">string</span><span class="constructor">ToDate(<span class="params">date</span>, TimeFormatConstant.YYYY_MM_DD)</span>;</span><br><span class="line">        Calendar cal = <span class="module-access"><span class="module"><span class="identifier">Calendar</span>.</span></span>get<span class="constructor">Instance()</span>;</span><br><span class="line">        cal.set<span class="constructor">Time(<span class="params">toDate</span>)</span>;</span><br><span class="line">        cal.add(Calendar.MONTH, months);</span><br><span class="line">        String temp = date<span class="constructor">ToString(<span class="params">cal</span>.<span class="params">getTime</span>()</span>,TimeFormatConstant.YYYY_MM_DD);</span><br><span class="line">        return temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: date</span></span><br><span class="line"><span class="comment">     * @param: days</span></span><br><span class="line"><span class="comment">     * @description: 获取添加天数的日期</span></span><br><span class="line"><span class="comment">     * @return: java.lang.String</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/12</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static Date get<span class="constructor">AddDayDate(String <span class="params">date</span>, <span class="params">int</span> <span class="params">days</span>)</span> &#123;</span><br><span class="line">        Date dayDate = <span class="built_in">string</span><span class="constructor">ToDate(<span class="params">date</span>, TimeFormatConstant.YYYY_MM_DD)</span>;</span><br><span class="line">        Calendar cal = <span class="module-access"><span class="module"><span class="identifier">Calendar</span>.</span></span>get<span class="constructor">Instance()</span>;</span><br><span class="line">        cal.set<span class="constructor">Time(<span class="params">dayDate</span>)</span>;</span><br><span class="line">        cal.add(Calendar.DATE, days);</span><br><span class="line">        return cal.get<span class="constructor">Time()</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: date1</span></span><br><span class="line"><span class="comment">     * @param: dateStr2</span></span><br><span class="line"><span class="comment">     * @param: days</span></span><br><span class="line"><span class="comment">     * @description: 时间比较</span></span><br><span class="line"><span class="comment">     * @return: int</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/13</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static <span class="built_in">int</span> compare<span class="constructor">Date(Date <span class="params">date1</span>, String <span class="params">dateStr2</span> ,<span class="params">int</span> <span class="params">days</span>)</span> &#123;</span><br><span class="line">        Date date2 = get<span class="constructor">AddDayDate(<span class="params">dateStr2</span>, <span class="params">days</span>)</span>;</span><br><span class="line">        <span class="keyword">if</span> (date1.get<span class="constructor">Time()</span> &gt; date2.get<span class="constructor">Time()</span>)&#123;</span><br><span class="line">            return -<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (date1.get<span class="constructor">Time()</span> &lt; date2.get<span class="constructor">Time()</span>)&#123;</span><br><span class="line">            return <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            return <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param:</span></span><br><span class="line"><span class="comment">     * @description: 间隔时间</span></span><br><span class="line"><span class="comment">     * @return: java.util.Date</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/13</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static DateDto get<span class="constructor">Date(<span class="params">int</span> <span class="params">months</span>)</span>&#123;</span><br><span class="line">        Calendar cal = <span class="module-access"><span class="module"><span class="identifier">Calendar</span>.</span></span>get<span class="constructor">Instance()</span>;</span><br><span class="line">        <span class="built_in">int</span> year = cal.get(Calendar.YEAR);</span><br><span class="line">        <span class="built_in">int</span> month = cal.get(Calendar.MONTH)+<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">int</span> day = cal.get(Calendar.DATE);</span><br><span class="line">        Integer<span class="literal">[]</span> daysArr = &#123;<span class="number">31</span>, (is<span class="constructor">LeapYear(<span class="params">year</span>)</span> ? <span class="number">29</span> : <span class="number">28</span>), <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span>(daysArr<span class="literal">[<span class="identifier">month</span>-<span class="number">1</span>]</span> &gt; day)&#123;</span><br><span class="line">            cal.add(Calendar.DATE,<span class="number">0</span>-day);</span><br><span class="line">        &#125;</span><br><span class="line">        DateDto dto = <span class="keyword">new</span> <span class="constructor">DateDto()</span>;</span><br><span class="line">        dto.set<span class="constructor">EndTime(<span class="params">dateToString</span>(<span class="params">cal</span>.<span class="params">getTime</span>()</span>,TimeFormatConstant.YYYY_MM_DD));</span><br><span class="line">        cal.add(Calendar.MONTH,<span class="number">0</span>-months);</span><br><span class="line">        dto.set<span class="constructor">StartTime(<span class="params">dateToString</span>(<span class="params">cal</span>.<span class="params">getTime</span>()</span>,TimeFormatConstant.YYYY_MM_DD));</span><br><span class="line">        return dto;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @param: year</span></span><br><span class="line"><span class="comment">     * @description: 判断是否是闰年</span></span><br><span class="line"><span class="comment">     * @return: boolean</span></span><br><span class="line"><span class="comment">     * @date: 2020/5/13</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public static boolean is<span class="constructor">LeapYear(<span class="params">int</span> <span class="params">year</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(year%<span class="number">4</span><span class="operator"> == </span><span class="number">0</span><span class="operator"> &amp;&amp; </span>year%<span class="number">100</span>!=<span class="number">0</span><span class="operator"> || </span>year%<span class="number">400</span><span class="operator"> == </span><span class="number">0</span>)&#123;</span><br><span class="line">            return <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            return <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-格式校验"><a href="#3-格式校验" class="headerlink" title="3.格式校验"></a>3.格式校验</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.empl.mgr.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.regex.Matcher;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.Pattern;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 校验</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: fenghao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2020/5/19</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CheckUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: phone</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 手机号校验</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: boolean</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/5/19</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkPhone</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">        String regex = <span class="string">"^((13[0-9])|(14[0-9])|(15([0-9]))|(16([0-9]))|(17([0-9]))|(18([0-9]))|(19([0-9])))\\d&#123;8&#125;$"</span>;</span><br><span class="line">        <span class="keyword">if</span> (phone.length() != <span class="number">11</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Pattern p = Pattern.compile(regex);</span><br><span class="line">            Matcher m = p.matcher(phone);</span><br><span class="line">            <span class="keyword">boolean</span> isMatch = m.matches();</span><br><span class="line">            <span class="keyword">return</span> isMatch;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: email</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 验证邮箱地址是否正确</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: boolean</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/5/19</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkEmail</span><span class="params">(String email)</span></span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            String check = <span class="string">"^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]&#123;2,&#125;$"</span>;</span><br><span class="line">            Pattern regex = Pattern.compile(check);</span><br><span class="line">            Matcher matcher = regex.matcher(email);</span><br><span class="line">            flag = matcher.matches();</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            flag = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: IDNumber</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 身份证号校验</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: boolean</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/5/19</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkIdentity</span><span class="params">(String IDNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (IDNumber == <span class="keyword">null</span> || <span class="string">""</span>.equals(IDNumber)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 定义判别用户身份证号的正则表达式（15位或者18位，最后一位可以为字母）</span></span><br><span class="line">        String regularExpression =</span><br><span class="line">                <span class="string">"(^[1-9]\\d&#123;5&#125;(18|19|20)\\d&#123;2&#125;((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d&#123;3&#125;[0-9Xx]$)|"</span></span><br><span class="line">                        + <span class="string">"(^[1-9]\\d&#123;5&#125;\\d&#123;2&#125;((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d&#123;3&#125;$)"</span>;</span><br><span class="line">        <span class="keyword">boolean</span> matches = IDNumber.matches(regularExpression);</span><br><span class="line">        <span class="comment">// 判断第18位校验值</span></span><br><span class="line">        <span class="keyword">if</span> (matches) &#123;</span><br><span class="line">            <span class="keyword">if</span> (IDNumber.length() == <span class="number">18</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">char</span>[] charArray = IDNumber.toCharArray();</span><br><span class="line">                    <span class="comment">// 前十七位加权因子</span></span><br><span class="line">                    <span class="keyword">int</span>[] idCardWi = &#123;<span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>&#125;;</span><br><span class="line">                    <span class="comment">// 这是除以11后，可能产生的11位余数对应的验证码</span></span><br><span class="line">                    String[] idCardY = &#123;<span class="string">"1"</span>, <span class="string">"0"</span>, <span class="string">"X"</span>, <span class="string">"9"</span>, <span class="string">"8"</span>, <span class="string">"7"</span>, <span class="string">"6"</span>, <span class="string">"5"</span>, <span class="string">"4"</span>, <span class="string">"3"</span>, <span class="string">"2"</span>&#125;;</span><br><span class="line">                    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; idCardWi.length; i++) &#123;</span><br><span class="line">                        <span class="keyword">int</span> current = Integer.parseInt(String.valueOf(charArray[i]));</span><br><span class="line">                        <span class="keyword">int</span> count = current * idCardWi[i];</span><br><span class="line">                        sum += count;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">char</span> idCardLast = charArray[<span class="number">17</span>];</span><br><span class="line">                    <span class="keyword">int</span> idCardMod = sum % <span class="number">11</span>;</span><br><span class="line">                    <span class="keyword">if</span> (idCardY[idCardMod].toUpperCase()</span><br><span class="line">                            .equals(String.valueOf(idCardLast).toUpperCase())) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">"身份证最后一位:"</span> + String.valueOf(idCardLast).toUpperCase()</span><br><span class="line">                                + <span class="string">"错误,正确的应该是:"</span> + idCardY[idCardMod].toUpperCase());</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> matches;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: cardId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 校验银行卡卡号</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: boolean</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/5/27</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkBankCard</span><span class="params">(String cardId)</span> </span>&#123;</span><br><span class="line">        String check = <span class="string">"^([1-9]&#123;1&#125;)(\\d&#123;15&#125;|\\d&#123;18&#125;)$"</span>;</span><br><span class="line">        Pattern regex = Pattern.compile(check);</span><br><span class="line">        Matcher matcher = regex.matcher(cardId);</span><br><span class="line">        <span class="keyword">if</span>(!matcher.matches())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span> bit = getBankCardCheckCode(cardId.substring(<span class="number">0</span>, cardId.length() - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span>(bit == <span class="string">'N'</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cardId.charAt(cardId.length() - <span class="number">1</span>) == bit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: nonCheckCodeCardId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>: 从不含校验位的银行卡卡号采用 Luhm 校验算法获得校验位</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: char</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span>: 2020/5/27</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">char</span> <span class="title">getBankCardCheckCode</span><span class="params">(String nonCheckCodeCardId)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nonCheckCodeCardId == <span class="keyword">null</span> || nonCheckCodeCardId.trim().length() == <span class="number">0</span></span><br><span class="line">                || !nonCheckCodeCardId.matches(<span class="string">"\\d+"</span>)) &#123;</span><br><span class="line">            <span class="comment">//如果传的不是数据返回N</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'N'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span>[] chs = nonCheckCodeCardId.trim().toCharArray();</span><br><span class="line">        <span class="keyword">int</span> luhmSum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = chs.length - <span class="number">1</span>, j = <span class="number">0</span>; i &gt;= <span class="number">0</span>; i--, j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> k = chs[i] - <span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">if</span>(j % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                k *= <span class="number">2</span>;</span><br><span class="line">                k = k / <span class="number">10</span> + k % <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            luhmSum += k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (luhmSum % <span class="number">10</span> == <span class="number">0</span>) ? <span class="string">'0'</span> : (<span class="keyword">char</span>)((<span class="number">10</span> - luhmSum % <span class="number">10</span>) + <span class="string">'0'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">工具类</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/">
+                <span class="level-item">人脸识别离线SDK整合系统（虹软）</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'FoP6lhnotTaDXjAyKMytVe5P-gzGzoHsz',
+        app_key: 'qvAdXiqKGPA0XjzLqT120wfS',
+        placeholder: '要不要说点啥...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/fh.jpg" alt="冯皓">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        冯皓
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Java软件开发工程师
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>陕西 西安</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            7
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            6
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/fh0725" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/fh0725">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://surpass.org.cn/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Surpasser</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">surpass.org.cn</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/springboot/">
+            <span class="level-start">
+                <span class="level-item">springboot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%90%AD%E5%BB%BA/">
+            <span class="level-start">
+                <span class="level-item">搭建</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%95%B4%E5%90%88/">
+            <span class="level-start">
+                <span class="level-item">整合</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/27/%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/7.jpg" alt="工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-27T07:58:49.000Z">2020-05-27</time></div>
+                    <a href="/2020/05/27/%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/6.jpg" alt="人脸识别离线SDK整合系统（虹软）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T02:49:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">人脸识别离线SDK整合系统（虹软）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B4%E5%90%88/">整合</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/08/git-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/5.jpg" alt="git-api">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T06:32:39.000Z">2020-04-08</time></div>
+                    <a href="/2020/04/08/git-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git-api</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd实现消息订阅、发布、退订">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd实现消息订阅、发布、退订</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd服务搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T03:30:05.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd服务搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git-api/">
+                        <span class="tag">Git-api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd/">
+                        <span class="tag">emqttd</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd%E6%90%AD%E5%BB%BA/">
+                        <span class="tag">emqttd搭建</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/">
+                        <span class="tag">hexo搭建，博客</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%EF%BC%8CSDK/">
+                        <span class="tag">人脸识别，SDK</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/27/%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/7.jpg" alt="工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-27T07:58:49.000Z">2020-05-27</time></div>
+                    <a href="/2020/05/27/%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/6.jpg" alt="人脸识别离线SDK整合系统（虹软）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T02:49:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%A6%BB%E7%BA%BFSDK%E6%95%B4%E5%90%88%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%99%B9%E8%BD%AF%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">人脸识别离线SDK整合系统（虹软）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B4%E5%90%88/">整合</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/08/git-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/5.jpg" alt="git-api">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T06:32:39.000Z">2020-04-08</time></div>
+                    <a href="/2020/04/08/git-api/" class="title has-link-black-ter is-size-6 has-text-weight-normal">git-api</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd实现消息订阅、发布、退订">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T04:24:16.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E3%80%81%E5%8F%91%E5%B8%83%E3%80%81%E9%80%80%E8%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd实现消息订阅、发布、退订</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/springboot/">springboot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/3.jpg" alt="emqttd服务搭建">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T03:30:05.000Z">2020-04-02</time></div>
+                    <a href="/2020/04/02/emqttd%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">emqttd服务搭建</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%90%AD%E5%BB%BA/">搭建</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git-api/">
+                        <span class="tag">Git-api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd/">
+                        <span class="tag">emqttd</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/emqttd%E6%90%AD%E5%BB%BA/">
+                        <span class="tag">emqttd搭建</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo%E6%90%AD%E5%BB%BA%EF%BC%8C%E5%8D%9A%E5%AE%A2/">
+                        <span class="tag">hexo搭建，博客</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%EF%BC%8CSDK/">
+                        <span class="tag">人脸识别，SDK</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+                        <span class="tag">工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="工具类" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 冯皓&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://ppoffice.github.io/hexo-theme-icarus">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/fh0725">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://fh0725.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
